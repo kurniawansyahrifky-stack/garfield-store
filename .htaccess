@@ -1,1 +1,12 @@
-.
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Keamanan tambahan: Melarang akses langsung ke file SQL dan konfigurasi
+<FilesMatch "\.(sql|ini|log|conf)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+Options -Indexes
